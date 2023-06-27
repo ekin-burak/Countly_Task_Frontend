@@ -1,7 +1,7 @@
 <template>
     <div class="welcome">
         <p>Welcome to Movie Review App !</p>
-        <p>Please click to the film that you want to see details</p>
+        <p>Please click to the film that you want to see details or you can create a review for the film</p>
     </div>
     
     <MovieList/>

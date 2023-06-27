@@ -8,14 +8,15 @@ const routes = [
     component: Home
   },
   {
-    path: '/movieDetails',
-    name: 'Movie',
-    component: () => import(/* webpackChunkName: "movie" */ '../views/MovieDetails.vue')
-  },
-  {
     path: '/createReview',
     name: 'Review',
     component: () => import(/* webpackChunkName: "review" */ '../views/createReview.vue')
+  },
+  {
+    path: '/movies/:id',
+    name: 'MovieDetails',
+    component: () => import(/* webpackChunkName: "movieDetails" */ '../views/MovieDetails.vue'), 
+    props: true
   }
 ]
 

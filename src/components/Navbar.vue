@@ -7,24 +7,26 @@
         </div>
       
         <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start" navbar-item-color="white">
+          <div class="navbar-start" >
             <strong class="navbar-item">
-              <router-link to="/">
+              <router-link to="/" >
                 Movie Review Web App
               </router-link>
-                
             </strong>
-          </div>
+        </div>
       
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <router-link to="/createReview" class="button is-primary">
-                  <strong>Create Review</strong>
-                </router-link>
-              </div>
+                <a class="button is-success is-light" href="https://github.com/ekin-burak/Countly_Task_Frontend">
+                  <strong>Frontend Source Code</strong>
+                </a>
+                <a class="button is-success is-light" href="https://github.com/ekin-burak/Countly_Task_Backend">
+                  <strong>Backend Source Code</strong>
+                </a>
             </div>
           </div>
+        </div>
         </div>
       </nav>
 </template>
