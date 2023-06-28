@@ -6,13 +6,13 @@
                 <div class="media-content">
                     <div class="title-wrapper">
                         <p class="title is-4">{{ movie.movieName }} 
-                            <div>
-                                <router-link :to="getMovieDetailURL(movie._id)">
-                                    <span class="button is-primary my-5">Details</span>
-                                </router-link>
-                                <router-link :to="getreviewDetailURL(movie._id)" class="button is-primary my-5">
-                                    <span><strong>Create Review</strong></span>
-                                </router-link>
+                            <div class="buttons my-3">
+                               <button @click="detailedMovie(movie._id)"
+                                class="card-footer-item button is-primary">Details
+                               </button>
+                               <button @click="createReview(movie._id)"
+                               class="card-footer-item button is-primary">Create Review
+                               </button>
                             </div>
                         </p>
                     </div>
@@ -26,8 +26,10 @@
 
 <script>
 import { ref, onMounted} from 'vue'
+import { useRouter } from 'vue-router'
 export default {
     setup() {
+        const router = useRouter();
         const movies = ref([])
         const API_URL = 'https://movie-reviewapp-20ae84a3a422.herokuapp.com/movies'
 
@@ -44,20 +46,38 @@ export default {
                 console.log(error)
             }
         }
-        function getMovieDetailURL(movieId) {
-            return `/movies/${movieId}`;
+        function getMovieDetailURL(movieID) {
+            return `/movies/${movieID}`;
         }
-        function getreviewDetailURL(movieId) {
-            return `/createReview/${movieId}`;
+        function getreviewDetailURL(movieID) {
+            return `/createReview/${movieID}`;
         }
 
+        async function detailedMovie(_id) {
+            router.push({
+                name: 'MovieDetails',
+                params: {
+                    id: _id,
+                },
+            })
+        }
+        async function createReview(_id) {
+            router.push ({
+                name: 'Review',
+                params: {
+                    id: _id,
+                }
+            })
+        }
         return {
             movies,
             getMovieDetailURL,
             getreviewDetailURL,
+            detailedMovie,
+            createReview
         };
-    },
-}
+    }, 
+};
 </script>
 
 <style>
