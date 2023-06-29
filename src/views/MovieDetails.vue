@@ -1,77 +1,102 @@
 <template>
-    <MovieList :post="movie" :key="movie._id"></MovieList>
-    <div class="card">
-        <div class="card-image">
-            <img src="../assets/Interstellar.jpg" alt="Placeholder image" class="centered">
+    <div  class="card my-5">
+        <div class="card-image">   
+            <img  :src="movieDetail.image" alt="Placeholder image" class="centered">
         </div>
         <div class="card-content">
-          <div class="description">
+            
+            <div class="info">
             <strong>Movie Name:</strong>
-            <a>{{ movie.movieName }}</a>
-            <br>
+            <p>{{ movieDetail.movieName }}</p>
             <strong>Description:</strong>
-            <a>{{ movie.description }}</a>
-            <br>
+            <p>{{ movieDetail.description }}</p>
             <strong>Release Year:</strong>
-            <a>{{ movie.releaseDate }}</a>
-            <br>
+            <p>{{ getYearFromDate(movieDetail.releaseDate) }}</p>
             <strong>Average Rating:</strong>
-            <a>{{ movie.avgRating }}</a>
-            <br>
+            <p>{{ movieDetail.avgRating }}</p>
           </div>
         </div>
+        <div class="reviewcard my-4">
+            <ReviewList/>
+        </div>
       </div>
+      
 </template>
 
 <script>
+import ReviewList from '../components/ReviewList.vue'
 import MovieList from '../components/MovieList.vue'
 import { useRouter,useRoute} from 'vue-router'
-import {ref, onMounted} from 'vue'
+import { ref, onMounted, computed } from 'vue'
+
 
 export default {
-    component:{
+    components:{
+        ReviewList,
         MovieList,
     },
-    setup(){
+    data(){
         const router = useRouter()
         const route = useRoute()
 
         const API_URL ='https://movie-reviewapp-20ae84a3a422.herokuapp.com/movies'
 
-        const movie = ref({
-            movieName: '',
-           description: '',  
-           releaseDate: '',
-           avgRating:  ''
-        })
-
-
         const movieDetail = ref({
-            movieName: movie.movieName,
-            description: movie.description,  
-            releaseDate: movie.releaseDate,
-            avgRating:  movie.avgRating
+            id:'',
+            image: '',
+            movieName: '',
+            description: '',  
+            releaseDate: '',
+            avgRating: '',
         })
+
         onMounted(() => {
             getMovie()
         })
         async function getMovie() {
             const { id }= route.params
-            const response = await fetch('${API_URL}/${id}')
+            const response = await fetch(`${API_URL}/${id}`)
             const json = await response.json()
-            movie.value = json
-        }
-        return {
-            movie,
+            movieDetail.value = json
+            console.log(response)
+            const a1 = movieDetail.image
+            const image = document.getElementById("movieimg")
 
         }
+        return {
+            movieDetail,
+        }
+    },
+    year() {
+        return {
+            dateString: this.movieDetail.releaseDate
+        };
+    },
+  methods: {
+    getYearFromDate(dateString) {
+      const date = new Date(dateString);
+      return date.getFullYear();
     }
+  }
 }
+
 </script>
 
 <style>
 .centered {
     display: block;
     margin: 0 auto;
+    width: 15%;
 }
+.card-content {
+    font-size: medium;
+    
+}
+.reviewcard {
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+    align-content: center; 
+}
+
 </style>

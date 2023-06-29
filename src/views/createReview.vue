@@ -5,7 +5,7 @@
 <script>
 import ReviewForm from "../components/ReviewForm.vue"
 import { reactive } from "vue"
-import { useRouter } from "vue-router"
+import { useRouter,useRoute } from "vue-router"
 
 export default {
     components: {
@@ -14,12 +14,15 @@ export default {
     setup(){
         const API_URL = 'https://movie-reviewapp-20ae84a3a422.herokuapp.com/reviews'
         const router = useRouter()
+        const route = useRoute()
+
+        const { id }= route.params
 
         const review = reactive ({
-            movieName: '',
             username: '',
             rating: '',
-            userReview: '',  
+            userReview: '',
+            movieID: id,  
 
         })
 
@@ -31,10 +34,11 @@ export default {
                         'content-type': 'application/json'
                     },
                     body: JSON.stringify({
-                        movieName: review.movieName,
                         username: review.username,
                         rating: review.rating,
                         userReview: review.userReview,
+                        movieID: review.movieID
+
 
                     })
                 })

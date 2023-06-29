@@ -2,11 +2,6 @@
  <div class="container mt-6">
     <form @submit.prevent="submitForm">
       <div class="field">
-        <label class="label">Movie Name</label>
-          <input v-model="post.movieName" class="input" type="text" placeholder="movie name">
-      </div>
-      
-      <div class="field">
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
           <input v-model="post.username" class="input is-success" type="text" placeholder="Username">
@@ -20,14 +15,16 @@
       </div>
 
       <div class="field">
-        <label class="label">Message</label>
+        <label class="label">Review</label>
         <div class="control">
-          <textarea v-model="post.userReview" class="textarea" placeholder="Your Message"></textarea>
+          <textarea v-model="post.userReview" class="textarea" placeholder="Your Review"></textarea>
         </div>
       </div>
       
+      
       <div class="field">
-        <input v-model="post.rating" class="input" type="number" min="1" max="5" placeholder="Rate the movie(Between 1-5)">
+        <label class="label">Rate</label>
+        <input v-model="post.rating" class="input" type="number" min="1" max="10" placeholder="Rate the movie(Between 1-10)">
       </div>
 
       <div class="field is-grouped">
@@ -46,4 +43,10 @@ export default {
 </script>
 
 <style>
+.field {
+  width: 65%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
 </style>

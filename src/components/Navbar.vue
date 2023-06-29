@@ -2,7 +2,9 @@
     <nav class="navbar is-info" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item">
+            <router-link to="/" >
             <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Vue.png" style="background: transparent;" width="34" height="42">
+            </router-link>
           </a>
         </div>
       

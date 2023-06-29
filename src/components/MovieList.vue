@@ -32,6 +32,7 @@ export default {
         const router = useRouter();
         const movies = ref([])
         const API_URL = 'https://movie-reviewapp-20ae84a3a422.herokuapp.com/movies'
+        
 
         onMounted(() => {
             getMovies()
@@ -48,9 +49,6 @@ export default {
         }
         function getMovieDetailURL(movieID) {
             return `/movies/${movieID}`;
-        }
-        function getreviewDetailURL(movieID) {
-            return `/createReview/${movieID}`;
         }
 
         async function detailedMovie(_id) {
@@ -72,7 +70,6 @@ export default {
         return {
             movies,
             getMovieDetailURL,
-            getreviewDetailURL,
             detailedMovie,
             createReview
         };
